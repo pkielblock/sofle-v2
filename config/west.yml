@@ -2,15 +2,16 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: mctechnology17
-      url-base: https://github.com/mctechnology17
+    - name: tokyo2006
+      url-base: https://github.com/tokyo2006
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: main
       import: app/west.yml
     - name: zmk-nice-oled
-      remote: mctechnology17
-      revision: main
+      remote: tokyo2006
+      # shortcut: unmerged ZMK-main port (mctechnology17/zmk-nice-oled PR #37), switch back to mctechnology17 once it merges
+      revision: de5b2afbd05f1a136e31ca28659373cd07d1e443
   self:
     path: config
