@@ -38,6 +38,15 @@ Then commit `config/sofle.keymap`. The script only reads from the keyboard; it n
 
 Studio can't edit the encoders (`sensor-bindings`: volume on the left, page up/down on the right), combos or macros. Change those in `config/sofle.keymap` and flash the left half.
 
+## Battery
+
+The controllers are "ProMicro nRF52840" nice!nano clones. ZMK reads the battery from the chip's VDDH supply, the same as on a nice!nano v2.
+
+- Charge with the power switch **on** (left half: switch left; right half: switch right, since that board is mounted upside down). With it off, the battery is disconnected and doesn't charge, and the blue LED blinks.
+- On USB, the screen shows the USB supply (lightning bolt + full), not the battery.
+- Right after a flash or reset, the icon can show empty for up to a minute, until the next 60-second reading.
+- If a half shows empty on battery after 2 hours of charging with the switch on, its battery is worn out. Replace it with a 301230 (about 110 mAh) LiPo, and check the plug polarity first.
+
 ## Screens
 
 `main` uses ZMK's stock status screen (`CONFIG_ZMK_DISPLAY=y` in `config/sofle.conf`).
