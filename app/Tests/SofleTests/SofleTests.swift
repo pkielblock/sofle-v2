@@ -92,4 +92,11 @@ final class SofleTests: XCTestCase {
         // Charged to 90, then down to 80 in 5 hours: the run starts at the peak, 40 hours left.
         XCTAssertEqual(TimeLeft.estimate(readings([(0, 40), (200, 90), (400, 80)]), now: start + 500 * 60), .left(40 * 3600))
     }
+
+    func testVoltage() {
+        // ZMK: pct = mv * 2 / 15 - 459, clamped to 0 at 3450 mV and 100 at 4200 mV.
+        XCTAssertEqual(Voltage.text(87).replacingOccurrences(of: ",", with: "."), "≈ 4.10 V")
+        XCTAssertEqual(Voltage.text(0).replacingOccurrences(of: ",", with: "."), "≤ 3.45 V")
+        XCTAssertEqual(Voltage.text(100).replacingOccurrences(of: ",", with: "."), "≥ 4.19 V")
+    }
 }

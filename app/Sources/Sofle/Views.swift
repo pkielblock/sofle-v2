@@ -92,13 +92,27 @@ struct MenuPanel: View {
                 Spacer()
                 if let note { Text(note).font(Kiel.Font.caption).foregroundStyle(Kiel.text3) }
             }
-            Text(percent(level)).font(Kiel.Font.money(28)).foregroundStyle(level == nil ? Kiel.text3 : Kiel.text)
-                .contentTransition(.numericText())
+            HStack(alignment: .firstTextBaseline) {
+                Text(percent(level)).font(Kiel.Font.money(28)).foregroundStyle(level == nil ? Kiel.text3 : Kiel.text)
+                    .contentTransition(.numericText())
+                Spacer()
+                if let level {
+                    Text(details(level, keyboard.timeLeft(half, now: now))).font(Kiel.Font.footnote).foregroundStyle(Kiel.text2)
+                        .monospacedDigit()
+                }
+            }
             // KielMeter's own colors read "fuller is worse"; a battery is the other way round.
             KielMeter(value: Double(level ?? 0) / 100, neutralColor: (level ?? 100) <= 10 ? Kiel.neg : (level ?? 100) <= 25 ? Kiel.warn : Kiel.pos)
         }
         .kielCard(padding: Kiel.Space.s4, radius: Kiel.Radius.lg)
         .accessibilityElement(children: .combine)
+    }
+
+    /// Voltage, plus the discharge rate the time-left estimate is based on.
+    private func details(_ level: Int, _ timeLeft: TimeLeft) -> String {
+        guard case .left(let seconds) = timeLeft, seconds > 0 else { return Voltage.text(level) }
+        let rate = (Double(level) / (seconds / 3600)).formatted(.number.precision(.fractionLength(1)))
+        return Voltage.text(level) + " · " + String(localized: "−\(rate)% per hour")
     }
 
     private func timeLeftText(_ timeLeft: TimeLeft) -> String? {

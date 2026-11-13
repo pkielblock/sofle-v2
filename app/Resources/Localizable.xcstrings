@@ -250,6 +250,16 @@
           }
         }
       }
+    },
+    "−%@%% per hour": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "−%@%% por hora"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

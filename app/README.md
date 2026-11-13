@@ -4,7 +4,7 @@ A macOS menu bar app for this keyboard. It reads everything from the keyboard it
 
 ![The keyboard window](screenshot.png)
 
-- **Menu bar:** both halves' battery, for example `93% · 91%`. Click it for the connection state and an estimate of the time left per half.
+- **Menu bar:** both halves' battery, for example `93% · 91%`. Click it for the connection state and, per half, the voltage, the drain rate and an estimate of the time left.
 - **Keyboard window:** a 3D model of the board (charcoal printed case, XDA caps, portrait OLEDs, knobs). Each cap shows its binding on the layer you pick, each knob shows what turning and pressing it does, and both screens are drawn like ZMK's stock status screen.
 
 English and Brazilian Portuguese, following the system language. Needs macOS 15 or later.
@@ -53,6 +53,7 @@ If the keyboard doesn't answer, the window shows `config/sofle.keymap` from GitH
 ## Limits
 
 - **Time left** is a straight line through the readings since the battery last stopped rising. ZMK reports whole percent steps about once a minute, so the app shows "Estimating…" until the level has dropped 2 points over at least 30 minutes. Time with the keyboard asleep counts as use, so the estimate runs long. Nothing is shown while charging.
+- **Voltage** is worked back from the percentage: ZMK only sends percent, computed in a straight line from 3.45 V (0%) to 4.2 V (100%), so each percent is 7.5 mV. `0%` means 3.45 V or less, which is low but not dead: the controller keeps running until the battery's protection cuts out near 3.0 V.
 - **Screens:** the keyboard doesn't report its active layer or Bluetooth profile number. The left screen shows the layer picked in the window, and the profile number is left out.
 - **Right half:** it reports 0% through the left half while it is off or out of range, so the app shows 0% as "Off or out of range".
 - **USB:** plugging or unplugging the cable isn't noticed until the next reload or reconnect.
@@ -64,7 +65,7 @@ If the keyboard doesn't answer, the window shows `config/sofle.keymap` from GitH
 | `Sources/Sofle/Keyboard.swift` | Bluetooth, USB serial and the Studio request queue |
 | `Sources/Sofle/Studio.swift` | Studio framing and the protobuf messages the app uses |
 | `Sources/Sofle/Labels.swift` | Binding names (ported from `tools/studio-to-keymap.ts`), keycap legends, `sofle.keymap` parser |
-| `Sources/Sofle/Battery.swift` | Time-left estimate |
+| `Sources/Sofle/Battery.swift` | Time-left estimate and voltage |
 | `Sources/Sofle/Board.swift` | The 3D model (SceneKit) |
 | `Sources/Sofle/Screens.swift` | The simulated OLEDs |
 | `Sources/Sofle/Views.swift` | Menu bar panel and keyboard window |

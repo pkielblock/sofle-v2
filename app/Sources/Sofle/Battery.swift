@@ -17,3 +17,16 @@ enum TimeLeft: Equatable {
         return .left(Double(last.level) / Double(drop) * elapsed)
     }
 }
+
+/// The battery voltage behind ZMK's percentage. ZMK maps 3.45 V → 0 % and 4.2 V → 100 % in a straight line, 7.5 mV
+/// per percent, so this is that line run backwards: exact to ±4 mV, except that 0 % and 100 % are open-ended.
+enum Voltage {
+    static func text(_ level: Int) -> String {
+        let format = FloatingPointFormatStyle<Double>.number.precision(.fractionLength(2))
+        switch level {
+        case ...0: return "≤ \(3.45.formatted(format)) V"
+        case 100...: return "≥ \(4.19.formatted(format)) V"
+        default: return "≈ \(((Double(level) + 459.5) * 7.5 / 1000).formatted(format)) V"
+        }
+    }
+}
