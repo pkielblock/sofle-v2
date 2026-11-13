@@ -1,0 +1,11 @@
+{
+  "name": "sofle-v2-tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync-keymap": "bun studio-dump.ts $(ls /dev/cu.usbmodem* | head -1) > studio.json && bun studio-to-keymap.ts studio.json ../config/sofle.keymap"
+  },
+  "dependencies": {
+    "@zmkfirmware/zmk-studio-ts-client": "^0.0.18"
+  }
+}
