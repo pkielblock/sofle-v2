@@ -1,0 +1,256 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "Connected": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conectado"
+          }
+        }
+      }
+    },
+    "Not connected": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não conectado"
+          }
+        }
+      }
+    },
+    "Bluetooth is off": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bluetooth desligado"
+          }
+        }
+      }
+    },
+    "Bluetooth permission needed": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Falta a permissão de Bluetooth"
+          }
+        }
+      }
+    },
+    "Allow Bluetooth for Sofle in System Settings › Privacy & Security › Bluetooth": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permita o Bluetooth para o Sofle em Ajustes do Sistema › Privacidade e Segurança › Bluetooth"
+          }
+        }
+      }
+    },
+    "Left": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esquerda"
+          }
+        }
+      }
+    },
+    "Right": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Direita"
+          }
+        }
+      }
+    },
+    "Off or out of range": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desligada ou fora de alcance"
+          }
+        }
+      }
+    },
+    "Estimating…": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimando…"
+          }
+        }
+      }
+    },
+    "Show keyboard": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar teclado"
+          }
+        }
+      }
+    },
+    "Quit": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encerrar"
+          }
+        }
+      }
+    },
+    "Layer": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camada"
+          }
+        }
+      }
+    },
+    "Layer %lld": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camada %lld"
+          }
+        }
+      }
+    },
+    "Keyboard, layer %@": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teclado, camada %@"
+          }
+        }
+      }
+    },
+    "Read again": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ler de novo"
+          }
+        }
+      }
+    },
+    "Read from the keyboard": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lido do teclado"
+          }
+        }
+      }
+    },
+    "Snapshot from the repository": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cópia do repositório"
+          }
+        }
+      }
+    },
+    "Reading keymap…": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lendo o mapa de teclas…"
+          }
+        }
+      }
+    },
+    "Left encoder": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encoder esquerdo"
+          }
+        }
+      }
+    },
+    "Right encoder": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encoder direito"
+          }
+        }
+      }
+    },
+    "Turn right: %@": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Girar para a direita: %@"
+          }
+        }
+      }
+    },
+    "Turn left: %@": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Girar para a esquerda: %@"
+          }
+        }
+      }
+    },
+    "Press: %@": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pressionar: %@"
+          }
+        }
+      }
+    },
+    "The keyboard didn't answer, so this is config/sofle.keymap from the repository. It may differ from what's on the keyboard.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O teclado não respondeu, então este é o config/sofle.keymap do repositório. Pode ser diferente do que está no teclado."
+          }
+        }
+      }
+    },
+    "The screens show the live battery and connection. The layer is the one picked here and the Bluetooth profile number is left out, because the keyboard doesn't report them.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As telas mostram a bateria e a conexão ao vivo. A camada é a escolhida aqui e o número do perfil Bluetooth fica de fora, porque o teclado não informa esses dados."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

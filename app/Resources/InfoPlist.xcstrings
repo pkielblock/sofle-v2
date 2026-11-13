@@ -1,0 +1,16 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "NSBluetoothAlwaysUsageDescription": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Sofle lê os níveis de bateria e o mapa de teclas do teclado por Bluetooth."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
