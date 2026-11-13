@@ -3,7 +3,7 @@
 ZMK firmware for my wireless Sofle v2: two nice!nano v2 controllers, 128x32 OLED screens, one rotary encoder per half.
 
 - **Keymap:** edited live in [ZMK Studio](https://zmk.studio). `config/sofle.keymap` is a snapshot of it.
-- **Screens:** [zmk-nice-oled](https://github.com/mctechnology17/zmk-nice-oled). The left half shows connection, battery, typing speed, the animated pet and the current layer. The right half shows its connection, its battery and the gem animation.
+- **Screens:** ZMK's stock status screen. The [zmk-nice-oled](https://github.com/mctechnology17/zmk-nice-oled) version (pet, typing speed, gem animation) is on the `nice-oled` branch: it builds, but it froze the keyboard on first flash, so it isn't on `main` yet.
 - **ZMK:** `main` (Zephyr 4.1).
 
 ## Flashing
@@ -12,7 +12,7 @@ GitHub Actions builds the firmware on every push.
 
 1. Open the latest green run under **Actions** and download the `firmware` artifact. Unzip it.
 2. Plug a half in by USB and double-tap its reset button. A drive called `NICENANO` appears.
-3. Copy that half's file onto the drive: `sofle_left nice_oled-nice_nano@2.0.0__zmk-zmk.uf2` to the left half, `sofle_right nice_oled-…uf2` to the right. It reboots by itself. macOS may warn that the disk wasn't ejected properly; that's expected.
+3. Copy that half's file onto the drive: `sofle_left-nice_nano@2.0.0__zmk-zmk.uf2` to the left half, `sofle_right-…uf2` to the right. It reboots by itself. macOS may warn that the disk wasn't ejected properly; that's expected.
 4. Do the same for the other half.
 
 - **Screen or firmware changes:** flash both halves. Each half draws its own screen.
@@ -40,15 +40,9 @@ Studio can't edit the encoders (`sensor-bindings`: volume on the left, page up/d
 
 ## Screens
 
-Screen options live in `config/sofle.conf`. The full list is in the [zmk-nice-oled README](https://github.com/mctechnology17/zmk-nice-oled). Current settings:
+`main` uses ZMK's stock status screen (`CONFIG_ZMK_DISPLAY=y` in `config/sofle.conf`).
 
-| Option | Value | Effect |
-|---|---|---|
-| `CONFIG_ZMK_DISPLAY_STATUS_SCREEN_CUSTOM` | `y` | Use zmk-nice-oled instead of the stock screen |
-| `CONFIG_NICE_OLED_WIDGET_ANIMATION_PERIPHERAL_CAT` | `n` | No cat on the right half |
-| `CONFIG_NICE_OLED_WIDGET_ANIMATION_PERIPHERAL_GEM` | `y` | Gem animation on the right half |
-
-The module comes from [tokyo2006's port](https://github.com/mctechnology17/zmk-nice-oled/pull/37) to ZMK `main`, pinned to a commit in `config/west.yml`. Upstream's `main` still targets ZMK v0.3 (LVGL 8) and doesn't build here. Once that PR merges, switch the remote back to `mctechnology17` and `revision: main`.
+The `nice-oled` branch swaps in [zmk-nice-oled](https://github.com/mctechnology17/zmk-nice-oled) with the gem animation on the right half. It uses [tokyo2006's port](https://github.com/mctechnology17/zmk-nice-oled/pull/37) to ZMK `main`, pinned to a commit, because upstream still targets ZMK v0.3 (LVGL 8). It builds, but the first flash froze both halves: no keys, no battery, and ZMK Studio stopped responding. Don't merge it until that's fixed.
 
 ## Layout
 
