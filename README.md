@@ -45,7 +45,7 @@ The controllers are "ProMicro nRF52840" nice!nano clones. ZMK reads the battery 
 - Charge with the power switch **on** (left half: switch left; right half: switch right, since that board is mounted upside down). With it off, the battery is disconnected and doesn't charge, and the blue LED blinks.
 - On USB, the screen shows the USB supply (lightning bolt + full), not the battery.
 - Right after a flash or reset, the icon can show empty for up to a minute, until the next 60-second reading.
-- Over Bluetooth, the keyboard reports both halves' battery levels (`CONFIG_ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_PROXY`). macOS's own Bluetooth menu shows only the left half; the menu bar app in [`app/`](app/) shows both, with an estimate of the time left.
+- Over Bluetooth, the keyboard reports both halves' battery levels (`CONFIG_ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_PROXY`). macOS's own Bluetooth menu shows only the left half; a menu bar app such as [Mighty Mitts](https://github.com/codyd51/Mighty-Mitts) shows both.
 - If a half shows empty on battery after 2 hours of charging with the switch on, its battery is worn out. Replace it with a 301230 (about 110 mAh) LiPo, and check the plug polarity first.
 
 ## Screens
@@ -63,6 +63,5 @@ The `nice-oled` branch swaps in [zmk-nice-oled](https://github.com/mctechnology1
 | `config/sofle.conf` | Screen, encoder, Bluetooth, battery reporting and Studio settings |
 | `config/sofle.keymap` | Snapshot of the ZMK Studio keymap, plus encoder bindings |
 | `tools/` | ZMK Studio → `sofle.keymap` sync script |
-| `app/` | macOS menu bar app: battery of both halves, and a 3D view of the live keymap ([README](app/README.md)) |
 
 Based on [tupinikeebs/sofle-zmk_oled](https://github.com/tupinikeebs/sofle-zmk_oled).
