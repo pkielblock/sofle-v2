@@ -85,3 +85,9 @@
         };
     };
 };
+
+// ZMK main turns on the nRF52840's high-voltage DC/DC (reg0) for nice_nano v2. It costs current at keyboard loads,
+// much more on ProMicro clones (zmkfirmware/zmk#2990). Keep the LDO.
+&reg0 {
+    status = "disabled";
+};
