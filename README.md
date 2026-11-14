@@ -3,17 +3,20 @@
 ZMK firmware for my wireless Sofle v2: two nice!nano v2 controllers, 128x32 OLED screens, one rotary encoder per half.
 
 - **Keymap:** edited live in [ZMK Studio](https://zmk.studio). `config/sofle.keymap` is a snapshot of it.
-- **Screens:** ZMK's stock status screen. The [zmk-nice-oled](https://github.com/mctechnology17/zmk-nice-oled) version (pet, typing speed, gem animation) is on the `nice-oled` branch: it builds, but it froze the keyboard on first flash, so it isn't on `main` yet.
+- **Screens:** off by default to save battery; `*_oled` firmware turns on ZMK's stock status screen. The [zmk-nice-oled](https://github.com/mctechnology17/zmk-nice-oled) version (pet, typing speed, gem animation) is on the `nice-oled` branch: it builds, but it froze the keyboard on first flash, so it isn't on `main` yet.
 - **ZMK:** `main` (Zephyr 4.1).
 
 ## Flashing
 
 GitHub Actions builds the firmware on every push.
 
+To build locally instead, start Docker (OrbStack) and run `./build.sh`. It builds everything in `build.yaml` in ZMK's own CI container and writes the `.uf2` files to `firmware/`. The first run downloads ZMK and Zephyr (about 4 minutes); after that, rebuilds take seconds. ZMK stays at the version from that first run until you run `./build.sh --update`.
+
 1. Open the latest green run under **Actions** and download the `firmware` artifact. Unzip it.
 2. Plug a half in by USB and double-tap its reset button. A drive called `NICENANO` appears.
-3. Copy that half's file onto the drive: `sofle_left-nice_nano@2.0.0__zmk-zmk.uf2` to the left half, `sofle_right-…uf2` to the right. It reboots by itself. macOS may warn that the disk wasn't ejected properly; that's expected.
+3. Copy that half's file onto the drive: `sofle_left-nice_nano@2.0.0__zmk-zmk.uf2` to the left half, `sofle_right-…uf2` to the right. With the OLEDs plugged in, use `sofle_left_oled.uf2` and `sofle_right_oled.uf2` instead. It reboots by itself. macOS may warn that the disk wasn't ejected properly, or Finder may show error -36; both are expected, because the board reboots before Finder finishes. If the drive disappeared by itself, the flash worked. To avoid the error, copy from Terminal instead: `cp -X firmware/<file>.uf2 /Volumes/NICENANO/`.
 4. Do the same for the other half.
+5. **Unplug USB, then press reset once on each half** (or switch its power off and on). These clones stay at about 7 mA after a flash until they're reset, which empties a 110 mAh battery in about 15 hours ([nrfmicro#87](https://github.com/joric/nrfmicro/issues/87)).
 
 - **Screen or firmware changes:** flash both halves. Each half draws its own screen.
 - **Keymap changes:** you don't need to flash. Use ZMK Studio.
@@ -46,11 +49,13 @@ The controllers are "ProMicro nRF52840" nice!nano clones. ZMK reads the battery 
 - On USB, the screen shows the USB supply (lightning bolt + full), not the battery.
 - Right after a flash or reset, the icon can show empty for up to a minute, until the next 60-second reading.
 - Over Bluetooth, the keyboard reports both halves' battery levels (`CONFIG_ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_PROXY`). macOS's own Bluetooth menu shows only the left half; a menu bar app such as [Mighty Mitts](https://github.com/codyd51/Mighty-Mitts) shows both.
+- Battery savers in the firmware: deep sleep after 15 minutes idle (`CONFIG_ZMK_SLEEP`; the first key press on a sleeping half wakes it and isn't typed), the nRF52840's high-voltage DC/DC turned off (`&reg0` in `config/sofle.keymap`, see [zmk#2990](https://github.com/zmkfirmware/zmk/issues/2990)), and the default Bluetooth transmit power.
+- The percentage moves up and down a few points on battery. That's normal: ZMK turns the voltage into a percentage in a straight line (3.45 V = 0%, 4.2 V = 100%, so about 7.5 mV per point), and a small cell's voltage dips under radio load and recovers at rest.
 - If a half shows empty on battery after 2 hours of charging with the switch on, its battery is worn out. Replace it with a 301230 (about 110 mAh) LiPo, and check the plug polarity first.
 
 ## Screens
 
-`main` uses ZMK's stock status screen (`CONFIG_ZMK_DISPLAY=y` in `config/sofle.conf`).
+Each build makes two firmwares per half: the default one with the screens off (`CONFIG_ZMK_DISPLAY=n` in `config/sofle.conf`), and `sofle_left_oled` / `sofle_right_oled` with ZMK's stock status screen on (`-DCONFIG_ZMK_DISPLAY=y` in `build.yaml`). Flash the same kind on both halves.
 
 The `nice-oled` branch swaps in [zmk-nice-oled](https://github.com/mctechnology17/zmk-nice-oled) with the gem animation on the right half. It uses [tokyo2006's port](https://github.com/mctechnology17/zmk-nice-oled/pull/37) to ZMK `main`, pinned to a commit, because upstream still targets ZMK v0.3 (LVGL 8). It builds, but the first flash froze both halves: no keys, no battery, and ZMK Studio stopped responding. Don't merge it until that's fixed.
 
@@ -58,10 +63,11 @@ The `nice-oled` branch swaps in [zmk-nice-oled](https://github.com/mctechnology1
 
 | File | Purpose |
 |---|---|
-| `build.yaml` | What Actions builds: left half (with ZMK Studio) and right half |
+| `build.sh` | Local build of everything in `build.yaml`, into `firmware/` |
+| `build.yaml` | What Actions builds: left half (with ZMK Studio) and right half, each with screens off and on (`_oled`) |
 | `config/west.yml` | ZMK and module versions |
 | `config/sofle.conf` | Screen, encoder, Bluetooth, battery reporting and Studio settings |
-| `config/sofle.keymap` | Snapshot of the ZMK Studio keymap, plus encoder bindings |
+| `config/sofle.keymap` | Snapshot of the ZMK Studio keymap, plus encoder bindings and the DC/DC power setting |
 | `tools/` | ZMK Studio → `sofle.keymap` sync script |
 
 Based on [tupinikeebs/sofle-zmk_oled](https://github.com/tupinikeebs/sofle-zmk_oled).
